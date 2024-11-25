@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, BrowserRouter } from 'react-router-dom';
 import Navbar from './components/common/Navbar';
 import Footer from './components/common/Footer';
 import Home from './pages/Home';
@@ -9,7 +9,7 @@ import ForStylists from './pages/ForStylists';
 
 function App() {
   return (
-    <Router>
+    <BrowserRouter basename="/kalyxa-website">
       <div className="min-h-screen flex flex-col">
         <Navbar />
         <main className="flex-grow">
@@ -22,7 +22,7 @@ function App() {
         </main>
         <Footer />
       </div>
-    </Router>
+    </BrowserRouter>
   );
 }
 
