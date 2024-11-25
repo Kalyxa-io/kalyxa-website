@@ -1,10 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link, useLocation } from 'react-router-dom';
+import WaitlistForm from '../home/WaitlistForm';
 
-const Navbar = () => {
+interface NavbarProps {
+  onApplyClick: () => void;
+}
+
+const Navbar: React.FC<NavbarProps> = ({ onApplyClick }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [showWaitlistForm, setShowWaitlistForm] = useState(false);
   const location = useLocation();
   
   const isForStylistsPage = location.pathname === '/for-stylists';
@@ -17,6 +23,11 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const handleWaitlistClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setShowWaitlistForm(true);
+  };
+
   const renderNavButtons = () => {
     if (isForStylistsPage) {
       return (
@@ -27,12 +38,12 @@ const Navbar = () => {
           >
             Home
           </Link>
-          <Link
-            to="#"
+          <button
+            onClick={onApplyClick}
             className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white px-6 py-2 rounded-full hover:shadow-lg transition-shadow duration-300"
           >
             Apply Today
-          </Link>
+          </button>
         </div>
       );
     }
@@ -51,12 +62,12 @@ const Navbar = () => {
           </Link>
         </div>
         
-        <Link
-          to="/waitlist"
+        <button
+          onClick={handleWaitlistClick}
           className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white px-6 py-2 rounded-full hover:shadow-lg transition-shadow duration-300"
         >
           Join Waitlist
-        </Link>
+        </button>
       </div>
     );
   };
@@ -71,12 +82,12 @@ const Navbar = () => {
           >
             Home
           </Link>
-          <Link
-            to="#"
+          <button
+            onClick={onApplyClick}
             className="block w-full px-4 py-3 text-center bg-gradient-to-r from-purple-600 to-indigo-600 text-white rounded-lg mt-4"
           >
             Apply Today
-          </Link>
+          </button>
         </div>
       );
     }
@@ -89,12 +100,12 @@ const Navbar = () => {
         >
           For Stylists
         </Link>
-        <Link
-          to="/waitlist"
+        <button
+          onClick={handleWaitlistClick}
           className="block w-full px-4 py-3 text-center bg-gradient-to-r from-purple-600 to-indigo-600 text-white rounded-lg mt-4"
         >
           Join Waitlist
-        </Link>
+        </button>
       </div>
     );
   };
@@ -114,7 +125,7 @@ const Navbar = () => {
             <div className="flex items-center">
               <Link to="/" className="flex items-center space-x-3 py-2">
                 <img 
-                  src="/images/kalyxa-logo.png" 
+                  src={`${process.env.PUBLIC_URL}/images/kalyxa-logo.png`}
                   alt="Kalyxa Logo" 
                   className="h-16 w-auto mt-2"
                 />
@@ -157,6 +168,13 @@ const Navbar = () => {
 
       {/* Spacer for fixed navbar */}
       <div className="h-20" />
+
+      {/* Add Waitlist Form */}
+      <AnimatePresence>
+        {showWaitlistForm && (
+          <WaitlistForm onClose={() => setShowWaitlistForm(false)} />
+        )}
+      </AnimatePresence>
     </>
   );
 };

@@ -1,123 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import EarningCalculator from '../components/Stylist/EarningCalculator';
 import OnboardingTimeline from '../components/Stylist/OnboardingTimeline';
 import JoinStylistCTA from '../components/home/JoinStylistCTA';
+import StylistApplicationForm from '../components/Stylist/StylistApplicationForm';
 
-const ServiceProcess = () => {
-  const services = [
-    {
-      title: "Personal Shopping Guide",
-      description: "Help clients build versatile wardrobes",
-      steps: [
-        "Review client's virtual wardrobe",
-        "Analyze style preferences and lifestyle",
-        "Suggest versatile pieces that complement existing items",
-        "Create multiple outfit combinations",
-        "Provide shopping links and alternatives"
-      ],
-      icon: "🛍️"
-    },
-    {
-      title: "Occasion Styling",
-      description: "Event-specific styling solutions",
-      steps: [
-        "Review event details and itinerary",
-        "Assess client's wardrobe",
-        "Create event-specific looks",
-        "Recommend new pieces if needed",
-        "Provide styling instructions"
-      ],
-      icon: "✨"
-    }
-  ];
+// Only define HeroSection props since JoinStylistCTA is imported
+interface HeroSectionProps {
+  onApplyClick: () => void;
+}
 
-  return (
-    <section className="min-h-screen bg-white py-32">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-24">
-          <h2 className="text-4xl font-bold text-gray-900 sm:text-5xl mb-8">
-            How It Works
-          </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Guide your clients through their style journey with our innovative virtual wardrobe platform
-          </p>
-        </div>
-
-        {/* Service Flow with adjusted spacing */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-24">
-          {services.map((service, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.2 }}
-              className="relative group"
-            >
-              <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-indigo-600 rounded-lg blur opacity-0 group-hover:opacity-25 transition duration-300"></div>
-              <div className="relative bg-white p-8 rounded-lg shadow-xl">
-                <div className="text-4xl mb-4">{service.icon}</div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">
-                  {service.title}
-                </h3>
-                <p className="text-gray-600 mb-6">{service.description}</p>
-                <div className="space-y-3">
-                  {service.steps.map((step, stepIndex) => (
-                    <div key={stepIndex} className="flex items-start">
-                      <div className="flex-shrink-0 h-6 w-6 rounded-full bg-purple-100 flex items-center justify-center mr-3">
-                        <span className="text-sm text-purple-600 font-medium">{stepIndex + 1}</span>
-                      </div>
-                      <p className="text-gray-600">{step}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-
-        {/* Platform Features with adjusted spacing */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-          {[
-            {
-              title: "Virtual Wardrobe Access",
-              description: "View clients' complete wardrobes with detailed item information",
-              icon: "👕"
-            },
-            {
-              title: "Styling Dashboard",
-              description: "Manage requests, create looks, and track client interactions",
-              icon: "📊"
-            },
-            {
-              title: "Direct Communication",
-              description: "Chat with clients and share recommendations in real-time",
-              icon: "💬"
-            }
-          ].map((feature, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1 }}
-              className="text-center p-6"
-            >
-              <div className="text-4xl mb-4">{feature.icon}</div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">
-                {feature.title}
-              </h3>
-              <p className="text-gray-600">
-                {feature.description}
-              </p>
-            </motion.div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-};
-
-const HeroSection = () => {
+const HeroSection: React.FC<HeroSectionProps> = ({ onApplyClick }) => {
   return (
     <section className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-50 via-white to-indigo-50 relative">
       {/* Background Elements */}
@@ -172,6 +65,7 @@ const HeroSection = () => {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="px-8 py-3 bg-gradient-to-r from-purple-600 to-indigo-600 text-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300"
+                onClick={onApplyClick}
               >
                 Apply Now
               </motion.button>
@@ -323,7 +217,12 @@ const HeroSection = () => {
   );
 };
 
-const BenefitsSection = () => {
+// In the BenefitsSection component, add onApplyClick prop
+interface BenefitsSectionProps {
+  onApplyClick: () => void;
+}
+
+const BenefitsSection: React.FC<BenefitsSectionProps> = ({ onApplyClick }) => {
   const benefits = [
     {
       title: "Expand Your Reach",
@@ -492,6 +391,7 @@ const BenefitsSection = () => {
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
+                onClick={onApplyClick}
                 className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white px-8 py-3 rounded-full font-semibold shadow-lg hover:shadow-xl transition-shadow duration-300"
               >
                 Join Our Founding Team
@@ -513,15 +413,145 @@ const BenefitsSection = () => {
   );
 };
 
-const ForStylists = () => {
+const ServiceProcess = () => {
+  const services = [
+    {
+      title: "Personal Shopping Guide",
+      description: "Help clients build versatile wardrobes",
+      steps: [
+        "Review client's virtual wardrobe",
+        "Analyze style preferences and lifestyle",
+        "Suggest versatile pieces that complement existing items",
+        "Create multiple outfit combinations",
+        "Provide shopping links and alternatives"
+      ],
+      icon: "🛍️"
+    },
+    {
+      title: "Occasion Styling",
+      description: "Event-specific styling solutions",
+      steps: [
+        "Review event details and itinerary",
+        "Assess client's wardrobe",
+        "Create event-specific looks",
+        "Recommend new pieces if needed",
+        "Provide styling instructions"
+      ],
+      icon: "✨"
+    }
+  ];
+
+  return (
+    <section className="min-h-screen bg-white py-32">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-24">
+          <h2 className="text-4xl font-bold text-gray-900 sm:text-5xl mb-8">
+            How It Works
+          </h2>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            Guide your clients through their style journey with our innovative virtual wardrobe platform
+          </p>
+        </div>
+
+        {/* Service Flow with adjusted spacing */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-24">
+          {services.map((service, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.2 }}
+              className="relative group"
+            >
+              <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-indigo-600 rounded-lg blur opacity-0 group-hover:opacity-25 transition duration-300"></div>
+              <div className="relative bg-white p-8 rounded-lg shadow-xl">
+                <div className="text-4xl mb-4">{service.icon}</div>
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">
+                  {service.title}
+                </h3>
+                <p className="text-gray-600 mb-6">{service.description}</p>
+                <div className="space-y-3">
+                  {service.steps.map((step, stepIndex) => (
+                    <div key={stepIndex} className="flex items-start">
+                      <div className="flex-shrink-0 h-6 w-6 rounded-full bg-purple-100 flex items-center justify-center mr-3">
+                        <span className="text-sm text-purple-600 font-medium">{stepIndex + 1}</span>
+                      </div>
+                      <p className="text-gray-600">{step}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Platform Features with adjusted spacing */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+          {[
+            {
+              title: "Virtual Wardrobe Access",
+              description: "View clients' complete wardrobes with detailed item information",
+              icon: "👕"
+            },
+            {
+              title: "Styling Dashboard",
+              description: "Manage requests, create looks, and track client interactions",
+              icon: "📊"
+            },
+            {
+              title: "Direct Communication",
+              description: "Chat with clients and share recommendations in real-time",
+              icon: "💬"
+            }
+          ].map((feature, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.1 }}
+              className="text-center p-6"
+            >
+              <div className="text-4xl mb-4">{feature.icon}</div>
+              <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                {feature.title}
+              </h3>
+              <p className="text-gray-600">
+                {feature.description}
+              </p>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+// Add this interface at the top of the file
+interface ForStylistsProps {
+  showApplicationForm: boolean;
+  setShowApplicationForm: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+// Update the component definition to use the props
+const ForStylists: React.FC<ForStylistsProps> = ({ showApplicationForm, setShowApplicationForm }) => {
+  const handleApplyClick = () => {
+    setShowApplicationForm(true);
+  };
+
   return (
     <div className="min-h-screen">
-      <HeroSection />
-      <BenefitsSection />
+      <HeroSection onApplyClick={handleApplyClick} />
+      <BenefitsSection onApplyClick={handleApplyClick} />
       <ServiceProcess />
       <EarningCalculator />
       <OnboardingTimeline />
-      <JoinStylistCTA />
+      <JoinStylistCTA onApplyClick={handleApplyClick} />
+      
+      <AnimatePresence>
+        {showApplicationForm && (
+          <StylistApplicationForm onClose={() => setShowApplicationForm(false)} />
+        )}
+      </AnimatePresence>
     </div>
   );
 };

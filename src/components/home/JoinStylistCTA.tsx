@@ -2,7 +2,11 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 
-const JoinStylistCTA = () => {
+interface JoinStylistCTAProps {
+  onApplyClick: () => void;
+}
+
+const JoinStylistCTA: React.FC<JoinStylistCTAProps> = ({ onApplyClick }) => {
   const benefits = [
     { icon: "💰", text: "Earn on Your Terms" },
     { icon: "🌍", text: "Work with clients globally" },
@@ -66,6 +70,7 @@ const JoinStylistCTA = () => {
                       <Link
                         to="/for-stylists"
                         className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-purple-600 to-indigo-600 text-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 w-full justify-center text-lg font-semibold"
+                        onClick={onApplyClick}
                       >
                         Start Earning Today
                         <svg

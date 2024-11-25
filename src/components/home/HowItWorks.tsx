@@ -7,19 +7,19 @@ const HowItWorksSection = () => {
       number: "01",
       title: "Upload Your Wardrobe",
       description: "Take photos of your clothes or import them from your favorite stores to create your digital wardrobe.",
-      image: "/images/2.jpeg"
+      image: `${process.env.PUBLIC_URL}/images/2.jpeg`
     },
     {
       number: "02",
       title: "Get Daily Suggestions",
       description: "Our AI analyzes your style, weather, and calendar to suggest perfect outfits every day.",
-      image: "/images/1.jpeg"
+      image: `${process.env.PUBLIC_URL}/images/1.jpeg`
     },
     {
       number: "03",
       title: "Mix and Match",
       description: "Discover new combinations from your existing wardrobe and save your favorite looks.",
-      image: "/images/3.jpeg"
+      image: `${process.env.PUBLIC_URL}/images/3.jpeg`
     }
   ];
 
@@ -30,19 +30,19 @@ const HowItWorksSection = () => {
       number: "01",
       title: "Choose Your Stylist",
       description: "Browse through profiles of professional stylists and fashion influencers.",
-      image: "/images/professional-stylist1.jpeg"
+      image: `${process.env.PUBLIC_URL}/images/professional-stylist1.jpeg`
     },
     {
       number: "02",
       title: "Select Your Service",
       description: "Pick between occasion styling or personal shopping guidance.",
-      image: "/images/professional-stylist2.jpeg"
+      image: `${process.env.PUBLIC_URL}/images/professional-stylist2.jpeg`
     },
     {
       number: "03",
       title: "Get Personalized Advice",
       description: "Receive expert recommendations tailored to your style and needs.",
-      image: "/images/professional-stylist3.jpeg"
+      image: `${process.env.PUBLIC_URL}/images/professional-stylist3.jpeg`
     }
   ];
 

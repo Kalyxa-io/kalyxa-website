@@ -1,7 +1,10 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import WaitlistForm from '../home/WaitlistForm';
 
 const HeroSection = () => {
+  const [showWaitlistForm, setShowWaitlistForm] = useState(false);
+
   return (
     <section className="min-h-screen relative flex items-center justify-center bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 dark:from-gray-900 dark:via-purple-900 dark:to-gray-900">
       {/* Background Elements */}
@@ -74,6 +77,7 @@ const HeroSection = () => {
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
+                onClick={() => setShowWaitlistForm(true)}
                 className="px-8 py-3 rounded-lg bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-medium shadow-lg shadow-purple-500/30 hover:shadow-purple-500/40 transition-all duration-300"
               >
                 Join Waitlist
@@ -340,6 +344,12 @@ const HeroSection = () => {
           <div className="w-1 h-3 bg-purple-600 rounded-full mt-2"></div>
         </motion.div>
       </motion.div>
+
+      <AnimatePresence>
+        {showWaitlistForm && (
+          <WaitlistForm onClose={() => setShowWaitlistForm(false)} />
+        )}
+      </AnimatePresence>
     </section>
   );
 };

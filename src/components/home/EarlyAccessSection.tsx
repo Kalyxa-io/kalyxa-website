@@ -1,7 +1,10 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import WaitlistForm from './WaitlistForm';
 
 const EarlyAccessSection = () => {
+  const [showWaitlistForm, setShowWaitlistForm] = useState(false);
+
   const betaFeedback = [
     {
       quote: "As a beta tester, I'm amazed by how accurately the AI understands my style preferences. Can't wait for the full launch!",
@@ -28,6 +31,10 @@ const EarlyAccessSection = () => {
       tag: "AI Styling"
     }
   ];
+
+  const handleEarlyAccessClick = () => {
+    setShowWaitlistForm(true);
+  };
 
   return (
     <section className="py-20 bg-gradient-to-b from-purple-50 to-white">
@@ -102,6 +109,7 @@ const EarlyAccessSection = () => {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
+              onClick={handleEarlyAccessClick}
               className="px-6 py-2 bg-gradient-to-r from-purple-600 to-indigo-600 text-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
             >
               Get Early Access
@@ -109,6 +117,13 @@ const EarlyAccessSection = () => {
           </div>
           <p className="mt-4 text-gray-500">Limited spots available for beta testing</p>
         </motion.div>
+
+        {/* Add Waitlist Form */}
+        <AnimatePresence>
+          {showWaitlistForm && (
+            <WaitlistForm onClose={() => setShowWaitlistForm(false)} />
+          )}
+        </AnimatePresence>
       </div>
     </section>
   );
