@@ -1,11 +1,12 @@
 {
-  "homepage": "https://parth012001.github.io/kalyxa-website",
+  "homepage": "/kalyxa-website",
   "name": "kalyxa-website",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
     "@headlessui/react": "^1.7.18",
     "@heroicons/react": "^2.1.1",
+    "@supabase/supabase-js": "^2.46.1",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",

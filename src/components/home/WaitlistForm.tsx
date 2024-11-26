@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
+import { supabase } from '../../lib/supabase';
 
 interface WaitlistFormProps {
   onClose: () => void;
@@ -11,12 +12,33 @@ const WaitlistForm: React.FC<WaitlistFormProps> = ({ onClose }) => {
     email: '',
     howHeard: ''
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission logic here
-    console.log(formData);
-    onClose();
+    setIsSubmitting(true);
+    
+    try {
+      const { error } = await supabase
+        .from('waitlist')
+        .insert([
+          {
+            name: formData.name,
+            email: formData.email,
+            how_heard: formData.howHeard
+          }
+        ]);
+
+      if (error) throw error;
+
+      alert('Successfully joined the waitlist!');
+      onClose();
+    } catch (error) {
+      console.error('Error:', error);
+      alert('There was an error joining the waitlist. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -92,9 +114,10 @@ const WaitlistForm: React.FC<WaitlistFormProps> = ({ onClose }) => {
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             type="submit"
+            disabled={isSubmitting}
             className="w-full px-6 py-3 bg-gradient-to-r from-purple-600 to-indigo-600 text-white rounded-lg mt-6"
           >
-            Join Waitlist
+            {isSubmitting ? 'Submitting...' : 'Join Waitlist'}
           </motion.button>
         </form>
       </motion.div>
