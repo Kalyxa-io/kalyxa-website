@@ -145,7 +145,11 @@ const HeroSection = () => {
                   {/* App Content */}
                   <div className="p-4 mt-6">
                     <div className="w-full h-60 bg-purple-100 rounded-xl mb-4 flex items-center justify-center">
-                      <span className="text-8xl">👗</span>
+                      <img 
+                        src="/images/jacket.png" 
+                        alt="Stylish Jacket"
+                        className="w-62 h-62 object-contain"
+                      />
                     </div>
                     <div className="space-y-2">
                       <div className="h-4 w-3/4 bg-gray-100 rounded"></div>
@@ -168,7 +172,11 @@ const HeroSection = () => {
                 }}
                 className="absolute top-20 right-20 w-32 h-32 bg-purple-100 rounded-2xl flex items-center justify-center shadow-lg"
               >
-                <span className="text-6xl">👗</span>
+                <img 
+                  src="/images/miniskirt.png" 
+                  alt="Stylish skirt"
+                  className="w-36 h-36 object-contain"
+                />
               </motion.div>
               
               <motion.div
@@ -199,7 +207,11 @@ const HeroSection = () => {
                 }}
                 className="absolute top-40 left-0 w-24 h-24 bg-pink-100 rounded-lg flex items-center justify-center shadow-lg transform rotate-12"
               >
-                <span className="text-4xl">👜</span>
+                <img 
+                  src="/images/bag.png" 
+                  alt="Stylish Bag"
+                  className="w-24 h-24 object-contain"
+                />
               </motion.div>
 
               <motion.div
@@ -214,7 +226,11 @@ const HeroSection = () => {
                 }}
                 className="absolute bottom-20 right-40 w-20 h-20 bg-purple-100 rounded-full flex items-center justify-center shadow-lg"
               >
-                <span className="text-4xl">👠</span>
+                <img 
+                  src="/images/shoes.png" 
+                  alt="Stylish Shoes"
+                  className="w-28 h-28 object-contain"
+                />
               </motion.div>
 
               {/* Decorative Circles */}

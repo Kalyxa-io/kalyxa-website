@@ -105,8 +105,12 @@ const JoinStylistCTA: React.FC<JoinStylistCTAProps> = ({ onApplyClick }) => {
                   {/* Social Proof */}
                   <div className="bg-white rounded-xl shadow-xl p-6 mb-6">
                     <div className="flex items-center space-x-4 mb-4">
-                      <div className="h-12 w-12 rounded-full bg-purple-100 flex items-center justify-center">
-                        👩‍💼
+                      <div className="h-12 w-12 rounded-full bg-purple-100 flex items-center justify-center overflow-hidden">
+                        <img 
+                          src="/images/fashionStylist.jpg" 
+                          alt="Sarah Mitchell"
+                          className="w-full h-full object-cover"
+                        />
                       </div>
                       <div>
                         <h4 className="font-semibold">Sarah Mitchell</h4>

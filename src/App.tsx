@@ -17,7 +17,7 @@ function App() {
   };
 
   return (
-    <BrowserRouter basename="/kalyxa-website">
+    <BrowserRouter>
       <div className="min-h-screen flex flex-col">
         <Navbar onApplyClick={handleStylistApplicationOpen} />
         <main className="flex-grow">

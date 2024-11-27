@@ -10,7 +10,7 @@ const EarlyAccessSection = () => {
       quote: "As a beta tester, I'm amazed by how accurately the AI understands my style preferences. Can't wait for the full launch!",
       name: "Sarah M.",
       role: "Early Access Member",
-      avatar: "👩‍💼", // We can replace with actual images later
+      avatar: "/images/Sarah.jpeg",
       rating: 5,
       tag: "AI Styling"
     },
@@ -18,7 +18,7 @@ const EarlyAccessSection = () => {
       quote: "The connection with professional stylists adds a personal touch that sets Kalyxa apart from other fashion apps I've tried.",
       name: "Michael K.",
       role: "Beta Program Member",
-      avatar: "👨‍💼",
+      avatar: "/images/Mike.jpeg",
       rating: 5,
       tag: "Stylist Platform"
     },
@@ -26,7 +26,7 @@ const EarlyAccessSection = () => {
       quote: "Being part of the beta testing has shown me the future of personal styling. The AI recommendations are spot-on!",
       name: "Emma R.",
       role: "Fashion Enthusiast",
-      avatar: "👩‍🦰",
+      avatar: "/images/Emma.jpeg",
       rating: 5,
       tag: "AI Styling"
     }
@@ -76,8 +76,13 @@ const EarlyAccessSection = () => {
                 </div>
 
                 {/* Quote */}
-                <div className="text-4xl mb-4">{feedback.avatar}</div>
                 <div className="mb-4">
+                  <img 
+                    src={feedback.avatar} 
+                    alt={feedback.name}
+                    className="w-20 h-20 rounded-full object-cover mb-4"
+                    loading="lazy"
+                  />
                   {/* Star Rating */}
                   <div className="flex gap-1 mb-3">
                     {[...Array(feedback.rating)].map((_, i) => (
