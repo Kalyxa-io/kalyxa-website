@@ -13,7 +13,7 @@ const Footer = () => {
   ];
 
   const socialLinks = [
-    { name: 'Instagram', href: '#', icon: 'instagram' },
+    { name: 'Instagram', href: 'https://www.instagram.com/kalyxa.official?igsh=NTc4MTIwNjQ2YQ==', icon: 'instagram' },
     { name: 'LinkedIn', href: '#', icon: 'linkedin' },
     { name: 'Twitter', href: '#', icon: 'twitter' },
   ];
