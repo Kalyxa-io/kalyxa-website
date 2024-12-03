@@ -8,7 +8,7 @@ import Contact from './pages/Contact';
 import ForStylists from './pages/ForStylists';
 import StylistApplicationForm from './components/Stylist/StylistApplicationForm';
 import { AnimatePresence } from 'framer-motion';
-import Terms from './pages/Terms';
+//import Terms from './pages/Terms';
 
 function App() {
   const [showStylistApplication, setShowStylistApplication] = useState(false);
@@ -27,7 +27,6 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/for-stylists" element={<ForStylists showApplicationForm={showStylistApplication} setShowApplicationForm={setShowStylistApplication} />} />
-            <Route path="/terms" element={<Terms />} />
           </Routes>
         </main>
         <Footer />

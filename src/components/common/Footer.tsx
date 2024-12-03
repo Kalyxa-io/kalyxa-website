@@ -8,8 +8,8 @@ const Footer = () => {
   ];
 
   const legalLinks = [
-    { name: 'Privacy Policy', href: 'https://www.termsfeed.com/live/e6e2ee95-1d26-4ff5-ac87-f63abd520390' },
-    { name: 'Terms of Service', href: '/terms' },
+    { name: 'Privacy Policy', href: '/privacy.html' },
+    { name: 'Terms of Service', href: '/terms.html' },
   ];
 
   const socialLinks = [
@@ -17,6 +17,10 @@ const Footer = () => {
     { name: 'LinkedIn', href: '#', icon: 'linkedin' },
     { name: 'Twitter', href: '#', icon: 'twitter' },
   ];
+
+  const openPrivacyPolicy = () => {
+    window.open('/privacy.html', '_blank');
+  };
 
   return (
     <footer className="bg-gradient-to-t from-purple-100 via-purple-50 to-white">
@@ -85,25 +89,15 @@ const Footer = () => {
             </p>
             <div className="flex space-x-6 mt-4 md:mt-0">
               {legalLinks.map((link) => (
-                link.href.startsWith('http') ? (
-                  <a
-                    key={link.name}
-                    href={link.href}
-                    className="text-gray-600 hover:text-purple-600 text-sm transition-colors duration-300"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {link.name}
-                  </a>
-                ) : (
-                  <Link
-                    key={link.name}
-                    to={link.href}
-                    className="text-gray-600 hover:text-purple-600 text-sm transition-colors duration-300"
-                  >
-                    {link.name}
-                  </Link>
-                )
+                <a
+                  key={link.name}
+                  href={link.href}
+                  className="text-gray-600 hover:text-purple-600 text-sm transition-colors duration-300"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {link.name}
+                </a>
               ))}
             </div>
           </div>
