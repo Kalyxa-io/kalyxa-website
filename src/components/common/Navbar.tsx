@@ -62,12 +62,14 @@ const Navbar: React.FC<NavbarProps> = ({ onApplyClick }) => {
           </Link>
         </div>
         
-        <button
-          onClick={handleWaitlistClick}
+        <a
+          href="https://apps.apple.com/us/app/kalyxa/id6738635909"
+          target="_blank"
+          rel="noopener noreferrer"
           className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white px-6 py-2 rounded-full hover:shadow-lg transition-shadow duration-300"
         >
-          Join Waitlist
-        </button>
+          Download App
+        </a>
       </div>
     );
   };
@@ -82,12 +84,14 @@ const Navbar: React.FC<NavbarProps> = ({ onApplyClick }) => {
           >
             Home
           </Link>
-          <button
-            onClick={onApplyClick}
+          <a
+            href="https://apps.apple.com/us/app/kalyxa/id6738635909"
+            target="_blank"
+            rel="noopener noreferrer"
             className="block w-full px-4 py-3 text-center bg-gradient-to-r from-purple-600 to-indigo-600 text-white rounded-lg mt-4"
           >
-            Apply Today
-          </button>
+            Download App
+          </a>
         </div>
       );
     }
@@ -100,12 +104,14 @@ const Navbar: React.FC<NavbarProps> = ({ onApplyClick }) => {
         >
           For Stylists
         </Link>
-        <button
-          onClick={handleWaitlistClick}
+        <a
+          href="https://apps.apple.com/us/app/kalyxa/id6738635909"
+          target="_blank"
+          rel="noopener noreferrer"
           className="block w-full px-4 py-3 text-center bg-gradient-to-r from-purple-600 to-indigo-600 text-white rounded-lg mt-4"
         >
-          Join Waitlist
-        </button>
+          Download App
+        </a>
       </div>
     );
   };

@@ -74,14 +74,16 @@ const HeroSection = () => {
               transition={{ duration: 0.8, delay: 0.4 }}
               className="mt-8 flex justify-start"
             >
-              <motion.button
+              <motion.a
+                href="https://apps.apple.com/us/app/kalyxa/id6738635909"
+                target="_blank"
+                rel="noopener noreferrer"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                onClick={() => setShowWaitlistForm(true)}
-                className="px-8 py-3 rounded-lg bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-medium shadow-lg shadow-purple-500/30 hover:shadow-purple-500/40 transition-all duration-300"
+                className="inline-block px-8 py-3 rounded-lg bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-medium shadow-lg shadow-purple-500/30 hover:shadow-purple-500/40 transition-all duration-300"
               >
-                Join Waitlist
-              </motion.button>
+                Download App Now!
+              </motion.a>
             </motion.div>
 
             {/* Interactive Stats */}
