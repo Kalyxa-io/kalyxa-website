@@ -95,9 +95,9 @@ const HeroSection = () => {
             >
               {[
                 { 
-                  label: 'Early Access', 
-                  value: 'Beta', 
-                  description: 'Join First'
+                  label: 'Available Now', 
+                  value: 'Live', 
+                  description: 'Start Styling'
                 },
                 { 
                   label: 'AI-Powered Matches', 
@@ -105,9 +105,9 @@ const HeroSection = () => {
                   description: 'Style Accuracy'
                 },
                 { 
-                  label: 'Launch Date', 
-                  value: '2024', 
-                  description: 'Coming Soon'
+                  label: 'Style Revolution', 
+                  value: '2025', 
+                  description: 'Get Started'
                 }
               ].map((stat, index) => (
                 <motion.div
