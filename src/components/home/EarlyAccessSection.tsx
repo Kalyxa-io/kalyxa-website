@@ -7,12 +7,12 @@ const EarlyAccessSection = () => {
 
   const betaFeedback = [
     {
-      quote: "As a beta tester, I'm amazed by how accurately the AI understands my style preferences. Can't wait for the full launch!",
+      quote: "Their home visit service made it so easy to get started! In just an hour, my entire wardrobe was digitized and organized in the app.",
       name: "Sarah M.",
       role: "Early Access Member",
       avatar: "/images/Sarah.jpeg",
       rating: 5,
-      tag: "AI Styling"
+      tag: "Wardrobe Digitization"
     },
     {
       quote: "The connection with professional stylists adds a personal touch that sets Kalyxa apart from other fashion apps I've tried.",

@@ -8,6 +8,7 @@ import Contact from './pages/Contact';
 import ForStylists from './pages/ForStylists';
 import StylistApplicationForm from './components/Stylist/StylistApplicationForm';
 import { AnimatePresence } from 'framer-motion';
+import DigitizationService from './pages/DigitizationService';
 //import Terms from './pages/Terms';
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/for-stylists" element={<ForStylists showApplicationForm={showStylistApplication} setShowApplicationForm={setShowStylistApplication} />} />
+            <Route path="/wardrobe-digitization" element={<DigitizationService />} />
           </Routes>
         </main>
         <Footer />

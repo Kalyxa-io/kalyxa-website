@@ -72,18 +72,67 @@ const HeroSection = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
-              className="mt-8 flex justify-start"
+              className="mt-8 flex flex-col space-y-6"
             >
-              <motion.a
-                href="https://apps.apple.com/us/app/kalyxa/id6738635909"
-                target="_blank"
-                rel="noopener noreferrer"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="inline-block px-8 py-3 rounded-lg bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-medium shadow-lg shadow-purple-500/30 hover:shadow-purple-500/40 transition-all duration-300"
+              {/* Main CTA Container */}
+              <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-6 space-y-4 sm:space-y-0">
+                {/* Download App Button */}
+                <motion.a
+                  href="https://apps.apple.com/us/app/kalyxa/id6738635909"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="inline-flex justify-center items-center px-8 py-4 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-medium shadow-lg shadow-purple-500/30 hover:shadow-purple-500/40 transition-all duration-300"
+                >
+                  <span>Download App Now!</span>
+                </motion.a>
+
+                {/* Home Visit Button with Enhanced Design */}
+                <motion.div
+                  className="relative group"
+                  whileHover={{ scale: 1.02 }}
+                >
+                  {/* Subtle Glow Effect */}
+                  <div className="absolute -inset-1 bg-gradient-to-r from-purple-600/20 to-indigo-600/20 rounded-xl blur-sm group-hover:blur-md transition-all duration-300"></div>
+                  
+                  <motion.a
+                    href="https://calendly.com/admin-kalyxa/in-person-wardrobe-service-san-francisco?month=2025-04"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="relative flex items-center justify-between px-6 py-4 rounded-xl bg-white border-2 border-purple-600 font-medium shadow-lg hover:shadow-xl transition-all duration-300"
+                  >
+                    <div className="flex items-center space-x-3">
+                      <span className="text-xl">📸</span>
+                      <div className="flex flex-col text-left">
+                        <span className="text-purple-600 font-semibold">Book Home Visit</span>
+                        <span className="text-xs text-purple-500">Professional Wardrobe Digitization</span>
+                      </div>
+                    </div>
+                    <span className="ml-4 text-purple-600 group-hover:translate-x-1 transition-transform duration-300">→</span>
+                  </motion.a>
+                </motion.div>
+              </div>
+
+              {/* Enhanced Service Info Box */}
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.8 }}
+                className="max-w-md bg-gradient-to-br from-purple-50 to-white rounded-xl p-5 shadow-lg border border-purple-100"
               >
-                Download App Now!
-              </motion.a>
+                <div className="flex items-start space-x-4">
+                  <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-purple-100 flex items-center justify-center">
+                    <span className="text-2xl">✨</span>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-purple-600">Expert Digitization Service</h4>
+                    <p className="text-sm text-gray-600 mt-2 leading-relaxed">
+                      Founders visit your home to digitize your wardrobe—no stress, no manual uploads, just seamless styling setup.
+                    </p>
+                  </div>
+                </div>
+              </motion.div>
             </motion.div>
 
             {/* Interactive Stats */}
