@@ -57,13 +57,6 @@ const Navbar: React.FC<NavbarProps> = ({ onApplyClick }) => {
 
     return (
       <div className="hidden md:flex items-center space-x-4">
-        <Link
-          to="/wardrobe-digitization"
-          className="text-gray-800 hover:text-purple-600 transition-colors duration-300"
-        >
-          Wardrobe Service
-        </Link>
-        
         <div className="relative group">
           <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-indigo-600 rounded-full opacity-0 group-hover:opacity-10 blur transition-all duration-300"></div>
           
@@ -112,12 +105,6 @@ const Navbar: React.FC<NavbarProps> = ({ onApplyClick }) => {
 
     return (
       <div className="px-4 pt-2 pb-3 space-y-1">
-        <Link
-          to="/wardrobe-digitization"
-          className="block px-3 py-2 text-gray-600 hover:text-purple-600 transition-colors duration-300"
-        >
-          Wardrobe Service
-        </Link>
         <Link
           to="/for-stylists"
           className="block px-3 py-2 text-gray-600 hover:text-purple-600 transition-colors duration-300"
@@ -181,17 +168,6 @@ const Navbar: React.FC<NavbarProps> = ({ onApplyClick }) => {
                     )}
                   </Link>
                 )}
-                
-                <Link
-                  to="/wardrobe-digitization"
-                  className={getNavLinkClasses(isWardrobePage)}
-                >
-                  Wardrobe Service
-                  <div className="absolute inset-x-0 -bottom-1 h-0.5 bg-purple-600 scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
-                  {isWardrobePage && (
-                    <div className="absolute inset-x-0 -bottom-1 h-0.5 bg-purple-600"></div>
-                  )}
-                </Link>
                 
                 <Link
                   to="/for-stylists"
@@ -261,15 +237,6 @@ const Navbar: React.FC<NavbarProps> = ({ onApplyClick }) => {
                     Home
                   </Link>
                 )}
-                
-                <Link
-                  to="/wardrobe-digitization"
-                  className={`block px-4 py-2.5 rounded-lg hover:bg-purple-50 transition-all duration-300 
-                    ${isWardrobePage ? 'text-purple-600 bg-purple-50' : 'text-gray-800 hover:text-purple-600'}`}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  Wardrobe Service
-                </Link>
                 
                 <Link
                   to="/for-stylists"

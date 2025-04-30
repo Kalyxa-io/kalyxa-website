@@ -78,22 +78,21 @@ const HeroSection = () => {
               <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-6 space-y-4 sm:space-y-0">
                 {/* Download App Button */}
                 <motion.a
-                  href="https://apps.apple.com/us/app/kalyxa/id6738635909"
+                  href="https://services.kalyxa.io/auth/login"
                   target="_blank"
                   rel="noopener noreferrer"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   className="inline-flex justify-center items-center px-8 py-4 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-medium shadow-lg shadow-purple-500/30 hover:shadow-purple-500/40 transition-all duration-300"
                 >
-                  <span>Download App Now!</span>
+                  <span>Book a Service Today</span>
                 </motion.a>
 
-                {/* Home Visit Button with Enhanced Design */}
+                {/* Home Visit Button with Enhanced Design - Commented Out
                 <motion.div
                   className="relative group"
                   whileHover={{ scale: 1.02 }}
                 >
-                  {/* Subtle Glow Effect */}
                   <div className="absolute -inset-1 bg-gradient-to-r from-purple-600/20 to-indigo-600/20 rounded-xl blur-sm group-hover:blur-md transition-all duration-300"></div>
                   
                   <motion.a
@@ -112,9 +111,10 @@ const HeroSection = () => {
                     <span className="ml-4 text-purple-600 group-hover:translate-x-1 transition-transform duration-300">→</span>
                   </motion.a>
                 </motion.div>
+                */}
               </div>
 
-              {/* Enhanced Service Info Box */}
+              {/* Enhanced Service Info Box - Commented Out
               <motion.div
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -133,6 +133,7 @@ const HeroSection = () => {
                   </div>
                 </div>
               </motion.div>
+              */}
             </motion.div>
 
             {/* Interactive Stats */}
