@@ -52,6 +52,12 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onApplyClick }) => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
+            {/* Product Hunt Badge */}
+            <div className="mt-2 mb-4">
+              <a href="https://www.producthunt.com/posts/kalyxa?embed=true&utm_source=badge-top-post-badge&utm_medium=badge&utm_souce=badge-kalyxa" target="_blank" rel="noopener noreferrer">
+                <img src="https://api.producthunt.com/widgets/embed-image/v1/top-post-badge.svg?post_id=958501&theme=light&period=daily&t=1746468316422" alt="Kalyxa Product Hunt Top 5" style={{ width: 250, height: 54 }} width="250" height="54" />
+              </a>
+            </div>
             <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl">
               <span className="block">Grow Your Styling</span>
               <span className="block text-purple-600">Business With Kalyxa</span>

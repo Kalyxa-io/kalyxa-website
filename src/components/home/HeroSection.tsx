@@ -52,6 +52,12 @@ const HeroSection = () => {
             <span className="text-indigo-600 font-semibold text-sm uppercase tracking-wider">
               Welcome to Kalyxa
             </span>
+            {/* Product Hunt Badge */}
+            <div className="mt-2 mb-4">
+              <a href="https://www.producthunt.com/posts/kalyxa?embed=true&utm_source=badge-top-post-badge&utm_medium=badge&utm_souce=badge-kalyxa" target="_blank" rel="noopener noreferrer">
+                <img src="https://api.producthunt.com/widgets/embed-image/v1/top-post-badge.svg?post_id=958501&theme=light&period=daily&t=1746468316422" alt="Kalyxa Product Hunt Top 5" style={{ width: 250, height: 54 }} width="250" height="54" />
+              </a>
+            </div>
             <h1 className="mt-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white sm:text-5xl md:text-6xl">
               <span className="block">Transform Your Style</span>
               <span className="block bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent">
