@@ -3,6 +3,67 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 const SHEETBEST_ENDPOINT = 'https://api.sheetbest.com/sheets/0f6e3ba6-7a66-4a43-b888-2386596e9972';
 
+const SuccessModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => {
+  return (
+    <AnimatePresence>
+      {isOpen && (
+        <>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50"
+            onClick={onClose}
+          />
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.95, y: 20 }}
+            className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-white rounded-2xl p-8 shadow-xl z-50 max-w-md w-full mx-4"
+          >
+            <div className="text-center">
+              <motion.div
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                transition={{ delay: 0.2 }}
+                className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4"
+              >
+                <svg
+                  className="w-8 h-8 text-green-600"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M5 13l4 4L19 7"
+                  />
+                </svg>
+              </motion.div>
+              <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                Thank you for your interest!
+              </h3>
+              <p className="text-gray-600 mb-6">
+                We'll reach out soon to schedule a quick intro call and help you get started.
+              </p>
+              <motion.button
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                onClick={onClose}
+                className="px-6 py-2 bg-gradient-to-r from-purple-600 to-indigo-600 text-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300 text-sm font-medium"
+              >
+                Got it!
+              </motion.button>
+            </div>
+          </motion.div>
+        </>
+      )}
+    </AnimatePresence>
+  );
+};
+
 const Landing = () => {
   const [formData, setFormData] = useState({
     name: '',
@@ -12,7 +73,7 @@ const Landing = () => {
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
 
   const [clientsPerMonth, setClientsPerMonth] = useState(10);
   const [averagePrice, setAveragePrice] = useState(100);
@@ -32,7 +93,6 @@ const Landing = () => {
   const handleApplyClick = async () => {
     try {
       setIsSubmitting(true);
-      setSubmitStatus('idle');
 
       const response = await fetch(SHEETBEST_ENDPOINT, {
         method: 'POST',
@@ -49,7 +109,7 @@ const Landing = () => {
         throw new Error('Failed to submit form');
       }
 
-      setSubmitStatus('success');
+      setShowSuccessModal(true);
       setFormData({
         name: '',
         email: '',
@@ -57,14 +117,9 @@ const Landing = () => {
         tiktok: ''
       });
 
-      // Reset status after 3 seconds
-      setTimeout(() => {
-        setSubmitStatus('idle');
-      }, 3000);
-
     } catch (error) {
       console.error('Error submitting form:', error);
-      setSubmitStatus('error');
+      // Handle error case if needed
     } finally {
       setIsSubmitting(false);
     }
@@ -76,6 +131,10 @@ const Landing = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-indigo-50">
+      <SuccessModal 
+        isOpen={showSuccessModal} 
+        onClose={() => setShowSuccessModal(false)} 
+      />
       <main>
         {/* Hero Section */}
         <section className="min-h-screen flex items-center justify-center relative">
@@ -215,26 +274,8 @@ const Landing = () => {
                         }`}
                         onClick={handleApplyClick}
                       >
-                        {isSubmitting ? 'Submitting...' : 'Apply Now'}
+                        {isSubmitting ? 'Submitting...' : "I'm Interested in Styling on Kalyxa"}
                       </motion.button>
-                      {submitStatus === 'success' && (
-                        <motion.p
-                          initial={{ opacity: 0, y: -10 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          className="mt-3 text-sm text-green-600 text-center"
-                        >
-                          Thank you for applying! We'll be in touch soon.
-                        </motion.p>
-                      )}
-                      {submitStatus === 'error' && (
-                        <motion.p
-                          initial={{ opacity: 0, y: -10 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          className="mt-3 text-sm text-red-600 text-center"
-                        >
-                          Oops! Something went wrong. Please try again.
-                        </motion.p>
-                      )}
                       <p className="mt-3 text-xs text-gray-500 text-center">
                         We respect your privacy. Your information will never be shared with third parties.
                       </p>
