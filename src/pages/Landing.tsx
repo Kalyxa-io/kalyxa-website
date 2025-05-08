@@ -478,7 +478,7 @@ const Landing = () => {
                 }}
                 transition={{ duration: 8 + idx, repeat: Infinity, repeatType: "reverse", ease: "easeInOut" }}
                 className={`hidden md:flex flex-col items-center absolute bg-white/80 shadow-lg rounded-xl px-4 py-3 min-w-[180px] max-w-[200px] border border-purple-100 backdrop-blur-md pointer-events-auto ${
-                  idx === 0 ? 'top-10 right-10' : idx === 1 ? 'top-1/2 right-16' : 'bottom-16 left-1/3'
+                  idx === 0 ? 'top-10 right-10' : idx === 1 ? 'top-1/2 right-16' : 'top-16 left-1/2 -translate-x-1/3'
                 }`}
                 style={{ zIndex: 30 + idx }}
               >
