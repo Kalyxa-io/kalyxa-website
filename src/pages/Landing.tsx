@@ -101,10 +101,11 @@ const CTAFormModal = ({ isOpen, onClose, onSuccess }: { isOpen: boolean; onClose
     }
     setIsSubmitting(true);
     try {
+      const pstTimestamp = new Date().toLocaleString('en-US', { timeZone: 'America/Los_Angeles' });
       const response = await fetch(SHEETBEST_ENDPOINT, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...formData, timestamp: new Date().toISOString() }),
+        body: JSON.stringify({ ...formData, timestamp: pstTimestamp }),
       });
       if (!response.ok) throw new Error('Failed to submit form');
       setFormData({ name: '', email: '', instagram: '', tiktok: '' });
@@ -187,6 +188,7 @@ const Landing = () => {
     }
     try {
       setIsSubmitting(true);
+      const pstTimestamp = new Date().toLocaleString('en-US', { timeZone: 'America/Los_Angeles' });
       const response = await fetch(SHEETBEST_ENDPOINT, {
         method: 'POST',
         headers: {
@@ -194,7 +196,7 @@ const Landing = () => {
         },
         body: JSON.stringify({
           ...formData,
-          timestamp: new Date().toISOString()
+          timestamp: pstTimestamp
         }),
       });
       if (!response.ok) {
