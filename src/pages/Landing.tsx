@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
+const SHEETBEST_ENDPOINT = 'https://api.sheetbest.com/sheets/0f6e3ba6-7a66-4a43-b888-2386596e9972';
+
 const Landing = () => {
   const [formData, setFormData] = useState({
     name: '',
@@ -8,6 +10,9 @@ const Landing = () => {
     instagram: '',
     tiktok: ''
   });
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
   const [clientsPerMonth, setClientsPerMonth] = useState(10);
   const [averagePrice, setAveragePrice] = useState(100);
@@ -24,9 +29,45 @@ const Landing = () => {
     }));
   };
 
-  const handleApplyClick = () => {
-    // Handle apply click logic here
-    console.log('Form data:', formData);
+  const handleApplyClick = async () => {
+    try {
+      setIsSubmitting(true);
+      setSubmitStatus('idle');
+
+      const response = await fetch(SHEETBEST_ENDPOINT, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ...formData,
+          timestamp: new Date().toISOString()
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to submit form');
+      }
+
+      setSubmitStatus('success');
+      setFormData({
+        name: '',
+        email: '',
+        instagram: '',
+        tiktok: ''
+      });
+
+      // Reset status after 3 seconds
+      setTimeout(() => {
+        setSubmitStatus('idle');
+      }, 3000);
+
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      setSubmitStatus('error');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const toggleFaq = (index: number) => {
@@ -168,11 +209,32 @@ const Landing = () => {
                       <motion.button
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
-                        className="w-full mt-4 px-6 py-2.5 bg-gradient-to-r from-purple-600 to-indigo-600 text-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300 text-sm font-medium"
+                        disabled={isSubmitting}
+                        className={`w-full mt-4 px-6 py-2.5 bg-gradient-to-r from-purple-600 to-indigo-600 text-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300 text-sm font-medium ${
+                          isSubmitting ? 'opacity-75 cursor-not-allowed' : ''
+                        }`}
                         onClick={handleApplyClick}
                       >
-                        Apply Now
+                        {isSubmitting ? 'Submitting...' : 'Apply Now'}
                       </motion.button>
+                      {submitStatus === 'success' && (
+                        <motion.p
+                          initial={{ opacity: 0, y: -10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          className="mt-3 text-sm text-green-600 text-center"
+                        >
+                          Thank you for applying! We'll be in touch soon.
+                        </motion.p>
+                      )}
+                      {submitStatus === 'error' && (
+                        <motion.p
+                          initial={{ opacity: 0, y: -10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          className="mt-3 text-sm text-red-600 text-center"
+                        >
+                          Oops! Something went wrong. Please try again.
+                        </motion.p>
+                      )}
                       <p className="mt-3 text-xs text-gray-500 text-center">
                         We respect your privacy. Your information will never be shared with third parties.
                       </p>
