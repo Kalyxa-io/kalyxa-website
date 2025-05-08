@@ -81,6 +81,41 @@ const Landing = () => {
                 <p className="mt-6 text-lg text-gray-600 max-w-3xl">
                 Your audience already trusts your style. Kalyxa helps you turn that trust into income — offer 1:1 styling, set your own rates, and get paid doing what you love.
                 </p>
+                <motion.div 
+                  className="mt-8 flex items-center gap-4"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.3 }}
+                >
+                  <a 
+                    href="https://www.producthunt.com/posts/kalyxa?embed=true&utm_source=badge-top-post-badge&utm_medium=badge&utm_souce=badge-kalyxa" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="inline-block hover:scale-105 transition-transform duration-300"
+                  >
+                    <img 
+                      src="https://api.producthunt.com/widgets/embed-image/v1/top-post-badge.svg?post_id=958501&theme=light&period=daily&t=1746666734045" 
+                      alt="Kalyxa - Shop smarter, dress better, with real stylists by your side | Product Hunt" 
+                      style={{ width: '250px', height: '54px' }} 
+                      width="250" 
+                      height="54" 
+                    />
+                  </a>
+                  <a 
+                    href="https://www.producthunt.com/posts/kalyxa?embed=true&utm_source=badge-featured&utm_medium=badge&utm_souce=badge-kalyxa" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="inline-block hover:scale-105 transition-transform duration-300"
+                  >
+                    <img 
+                      src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=958501&theme=light&t=1746666756388" 
+                      alt="Kalyxa - Shop smarter, dress better, with real stylists by your side | Product Hunt" 
+                      style={{ width: '250px', height: '54px' }} 
+                      width="250" 
+                      height="54" 
+                    />
+                  </a>
+                </motion.div>
                 <div className="mt-10">
                   <div className="bg-white/50 backdrop-blur-sm p-6 rounded-2xl shadow-sm border border-purple-100">
                     <h3 className="text-lg font-semibold text-purple-900 mb-4">Join Our Community</h3>
