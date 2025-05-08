@@ -3,6 +3,24 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 const SHEETBEST_ENDPOINT = 'https://api.sheetbest.com/sheets/0f6e3ba6-7a66-4a43-b888-2386596e9972';
 
+const floatingReviews = [
+  {
+    image: "/images/Sarah.jpeg",
+    name: "Sarah M.",
+    note: "Already got my first paid styling client!",
+  },
+  {
+    image: "/images/Emma.jpeg",
+    name: "Emma R.",
+    note: "So easy to use and my followers love it!",
+  },
+  {
+    image: "/images/fashionStylist.jpg",
+    name: "Michael T.",
+    note: "Finally a platform for real creators.",
+  },
+];
+
 const SuccessModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => {
   return (
     <AnimatePresence>
@@ -64,6 +82,74 @@ const SuccessModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => voi
   );
 };
 
+const CTAFormModal = ({ isOpen, onClose, onSuccess }: { isOpen: boolean; onClose: () => void; onSuccess: () => void }) => {
+  const [formData, setFormData] = useState({ name: '', email: '', instagram: '', tiktok: '' });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState('');
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError('');
+    if (!formData.name.trim() || !formData.email.trim() || !formData.instagram.trim()) {
+      setError('Please fill in your name, email, and Instagram handle.');
+      return;
+    }
+    setIsSubmitting(true);
+    try {
+      const response = await fetch(SHEETBEST_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...formData, timestamp: new Date().toISOString() }),
+      });
+      if (!response.ok) throw new Error('Failed to submit form');
+      setFormData({ name: '', email: '', instagram: '', tiktok: '' });
+      onSuccess();
+      onClose();
+    } catch (err) {
+      setError('Oops! Something went wrong. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  return (
+    <AnimatePresence>
+      {isOpen && (
+        <>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50"
+            onClick={onClose}
+          />
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.95, y: 20 }}
+            className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-white rounded-2xl p-8 shadow-xl z-50 max-w-md w-full mx-4"
+          >
+            <h3 className="text-xl font-semibold text-gray-900 mb-4 text-center">Get Early Access to Kalyxa</h3>
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <input type="text" name="name" value={formData.name} onChange={handleInputChange} placeholder="Your Name" required className="w-full px-3 py-2 bg-white border border-gray-200 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent text-sm" />
+              <input type="email" name="email" value={formData.email} onChange={handleInputChange} placeholder="Your Email" required className="w-full px-3 py-2 bg-white border border-gray-200 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent text-sm" />
+              <input type="text" name="instagram" value={formData.instagram} onChange={handleInputChange} placeholder="Instagram Handle" required className="w-full px-3 py-2 bg-white border border-gray-200 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent text-sm" />
+              <input type="text" name="tiktok" value={formData.tiktok} onChange={handleInputChange} placeholder="TikTok Handle (optional)" className="w-full px-3 py-2 bg-white border border-gray-200 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent text-sm" />
+              {error && <p className="text-red-600 text-sm text-center">{error}</p>}
+              <button type="submit" disabled={isSubmitting} className={`w-full px-6 py-2.5 bg-gradient-to-r from-purple-600 to-indigo-600 text-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300 text-sm font-medium ${isSubmitting ? 'opacity-75 cursor-not-allowed' : ''}`}>{isSubmitting ? 'Submitting...' : 'Request Early Access'}</button>
+            </form>
+          </motion.div>
+        </>
+      )}
+    </AnimatePresence>
+  );
+};
+
 const Landing = () => {
   const [formData, setFormData] = useState({
     name: '',
@@ -74,6 +160,7 @@ const Landing = () => {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [showCTAForm, setShowCTAForm] = useState(false);
 
   const [clientsPerMonth, setClientsPerMonth] = useState(10);
   const [averagePrice, setAveragePrice] = useState(100);
@@ -81,6 +168,8 @@ const Landing = () => {
 
   const monthlyEarnings = clientsPerMonth * averagePrice;
   const yearlyEarnings = monthlyEarnings * 12;
+
+  const [formError, setFormError] = useState('');
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -91,9 +180,13 @@ const Landing = () => {
   };
 
   const handleApplyClick = async () => {
+    setFormError('');
+    if (!formData.name.trim() || !formData.email.trim() || !formData.instagram.trim()) {
+      setFormError('Please fill in your name, email, and Instagram handle.');
+      return;
+    }
     try {
       setIsSubmitting(true);
-
       const response = await fetch(SHEETBEST_ENDPOINT, {
         method: 'POST',
         headers: {
@@ -104,11 +197,9 @@ const Landing = () => {
           timestamp: new Date().toISOString()
         }),
       });
-
       if (!response.ok) {
         throw new Error('Failed to submit form');
       }
-
       setShowSuccessModal(true);
       setFormData({
         name: '',
@@ -116,7 +207,6 @@ const Landing = () => {
         instagram: '',
         tiktok: ''
       });
-
     } catch (error) {
       console.error('Error submitting form:', error);
       // Handle error case if needed
@@ -135,9 +225,14 @@ const Landing = () => {
         isOpen={showSuccessModal} 
         onClose={() => setShowSuccessModal(false)} 
       />
+      <CTAFormModal
+        isOpen={showCTAForm}
+        onClose={() => setShowCTAForm(false)}
+        onSuccess={() => setShowSuccessModal(true)}
+      />
       <main>
         {/* Hero Section */}
-        <section className="min-h-screen flex items-center justify-center relative">
+        <section className="min-h-screen flex items-center justify-center relative overflow-visible">
           <div className="absolute inset-0 overflow-hidden">
             <motion.div
               className="absolute -top-20 -right-20 w-96 h-96 bg-purple-300 rounded-full mix-blend-multiply filter blur-3xl opacity-30"
@@ -264,6 +359,9 @@ const Landing = () => {
                         </div>
                       </div>
                     </div>
+                    {formError && (
+                      <p className="text-red-600 text-sm text-center mt-2">{formError}</p>
+                    )}
                     <div className="mt-4">
                       <motion.button
                         whileHover={{ scale: 1.02 }}
@@ -366,6 +464,36 @@ const Landing = () => {
                 </div>
               </div>
             </div>
+          </div>
+          {/* Floating Reviews */}
+          <div className="absolute inset-0 pointer-events-none z-20">
+            {floatingReviews.map((review, idx) => (
+              <motion.div
+                key={review.name}
+                initial={{ opacity: 0, y: 20, x: 0 }}
+                animate={{
+                  opacity: 0.95,
+                  y: [20, -10, 20],
+                  x: idx === 0 ? [-40, 0, -40] : idx === 1 ? [0, 30, 0] : [40, 0, 40],
+                }}
+                transition={{ duration: 8 + idx, repeat: Infinity, repeatType: "reverse", ease: "easeInOut" }}
+                className={`hidden md:flex flex-col items-center absolute bg-white/80 shadow-lg rounded-xl px-4 py-3 min-w-[180px] max-w-[200px] border border-purple-100 backdrop-blur-md pointer-events-auto ${
+                  idx === 0 ? 'top-10 right-10' : idx === 1 ? 'top-1/2 right-16' : 'bottom-16 left-1/3'
+                }`}
+                style={{ zIndex: 30 + idx }}
+              >
+                <img src={review.image} alt={review.name} className="w-8 h-8 rounded-full border-2 border-purple-200 mb-2" />
+                <div className="flex items-center mb-1">
+                  {[...Array(5)].map((_, i) => (
+                    <svg key={i} className="w-3 h-3 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    </svg>
+                  ))}
+                </div>
+                <p className="text-xs text-gray-700 text-center font-medium mb-1">"{review.note}"</p>
+                <span className="text-[11px] text-purple-500 font-semibold">{review.name}</span>
+              </motion.div>
+            ))}
           </div>
         </section>
 
@@ -715,18 +843,19 @@ const Landing = () => {
                 </motion.div>
               ))}
             </div>
-            <div className="mt-12 text-center">
-              <motion.button
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                className="px-8 py-3 bg-gradient-to-r from-purple-600 to-indigo-600 text-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300 text-sm font-medium"
-                onClick={handleApplyClick}
-              >
-                Join Our Early Testers
-              </motion.button>
-            </div>
           </div>
         </section>
+        {/* New CTA at the bottom */}
+        <div className="py-16 flex justify-center bg-gradient-to-t from-purple-50 to-white">
+          <motion.button
+            whileHover={{ scale: 1.04 }}
+            whileTap={{ scale: 0.98 }}
+            className="px-10 py-4 bg-gradient-to-r from-purple-600 to-indigo-600 text-white text-lg rounded-xl shadow-lg hover:shadow-2xl font-semibold transition-all duration-300"
+            onClick={() => setShowCTAForm(true)}
+          >
+            I'm Interested in Styling on Kalyxa
+          </motion.button>
+        </div>
       </main>
     </div>
   );
